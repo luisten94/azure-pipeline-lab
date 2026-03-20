@@ -1,37 +1,13 @@
 trigger:
-  - main
-  - develop
+- main
 
-pr:
-  - main
+pool:
+  name: LuisMacPool
 
 stages:
-  - stage: Build
-    jobs:
-      - job: BuildJob
-        pool:
-          name: LuisMacPool
-        steps:
-          - script: echo "Building app..."
-            displayName: Build step
-
-  - stage: Test
-    dependsOn: Build
-    jobs:
-      - job: TestJob
-        pool:
-          name: LuisMacPool
-        steps:
-          - script: echo "Running tests..."
-            displayName: Test step
-
-  - stage: Deploy
-    dependsOn: Test
-    condition: eq(variables['Build.SourceBranch'], 'refs/heads/main')
-    jobs:
-      - job: DeployJob
-        pool:
-          name: LuisMacPool
-        steps:
-          - script: echo "Deploying app..."
-            displayName: Deploy step
+- stage: Build
+  jobs:
+  - job: BuildJob
+    steps:
+    - script: echo "HELLO FROM MY LOCAL MAC"
+      displayName: Test local agent
